@@ -22,6 +22,6 @@ with futures.ThreadPoolExecutor() as executor:
     for i in range(5, 0, -1):
         print(f'sending {i} seconds...')
         number = sleep_pb2.Seconds(value=i)
-        # make the call
+        # call service method Sleep
         future = executor.submit(stub.Sleep, number)
         future.add_done_callback(print_res)
