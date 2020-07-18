@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+// define data structure
+message Seconds {
+    int32 value = 1;
+}
+
+// define service
+service SleepTime {
+    rpc Sleep(Seconds) returns (Seconds) {} 
+}
