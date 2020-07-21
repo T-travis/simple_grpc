@@ -10,9 +10,6 @@ import sleep_pb2
 # open a gRPC channel
 channel = grpc.insecure_channel('localhost:50051')
 
-# create a stub (client)
-stub = sleep_pb2_grpc.SleepTimeStub(channel)
-
 
 def print_res(future):
     print(f'receiving {future.result().value} ')
@@ -20,6 +17,8 @@ def print_res(future):
 
 with futures.ThreadPoolExecutor() as executor:
     for i in range(5, 0, -1):
+        # create a stub (client)
+        stub = sleep_pb2_grpc.SleepTimeStub(channel)
         print(f'sending {i} seconds...')
         number = sleep_pb2.Seconds(value=i)
         # call service method Sleep
